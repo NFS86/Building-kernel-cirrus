@@ -90,11 +90,10 @@ Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 }
 # Fin Error
 function finerr() {
-    curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" \
-        -d chat_id="$TG_CHAT_ID" \
-        -d "disable_web_page_preview=true" \
-        -d "parse_mode=markdown" \
-        -d text="================================%0A<code>Building Kernel Gagal,Jiancoeg..</code>%0A================================" \
+    curl -s -X POST "$BOT_MSG_URL" -d chat_id="$TG_CHAT_ID" \
+	    -d "disable_web_page_preview=true" \
+	    -d "parse_mode=html" \
+        -d text="==============================%0A<b>          Building Kernel Failed [❌]</b>%0A==============================" \
     curl -s -X POST "$BOT_MSG_URL2/sendSticker" \
         -d sticker="CAACAgIAAx0CXjGT1gACDRRhYsUKSwZJQFzmR6eKz2aP30iKqQACPgADr8ZRGiaKo_SrpcJQIQQ" \
         -d chat_id="$TG_CHAT_ID"
