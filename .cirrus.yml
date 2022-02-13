@@ -35,6 +35,9 @@ task:
   Build_kernel_GCC_11_script:
       - ./gcc.sh
 
+  Remove_old_build_script:
+      - ./rm.sh
+
   Build_kernel_GCC_12_script:
       - ./gcc12.sh
 
