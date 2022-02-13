@@ -2,7 +2,7 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=NeedForSpeed-GCC
+export KERNEL_NAME=NeedForSpeed-GCC-11
 KERNEL_ROOTDIR=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
 GCC_ROOTDIR=$CIRRUS_WORKING_DIR/GCC-11-64
