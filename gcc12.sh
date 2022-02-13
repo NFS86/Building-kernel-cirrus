@@ -2,18 +2,21 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=NeedForSpeed-CLANG
+export KERNEL_NAME=NeedForSpeed-GCC
 KERNEL_ROOTDIR=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME
-DEVICE_DEFCONFIG=rosy-clang_defconfig
-CLANG_ROOTDIR=$CIRRUS_WORKING_DIR/CLANG
-CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
-LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
+DEVICE_DEFCONFIG=rosy-perf_defconfig
+GCC_ROOTDIR=$CIRRUS_WORKING_DIR/GCC64
+GCC_ROOTDIR32=$CIRRUS_WORKING_DIR/GCC32
+GCC_VER="$("$GCC_ROOTDIR"/bin/aarch64-elf-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
+GCC_VER32="$("$GCC_ROOTDIR32"/bin/arm-eabi-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
+LLD_VER="$("$GCC_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 IMAGE=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date +"%F-%S")
 START=$(date +"%s")
 export KBUILD_BUILD_USER=$BUILD_USER
 export KBUILD_BUILD_HOST=$BUILD_HOST
-export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
+export KBUILD_COMPILER_STRING="$GCC_VER"
+export KBUILD_COMPILER_STRING32="$GCC_VER32  with $LLD_VER"
 export BOT_MSG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 export BOT_MSG_URL2="https://api.telegram.org/bot$TG_TOKEN"
 }
@@ -34,7 +37,7 @@ echo BUILDER NAME = ${KBUILD_BUILD_USER}
 echo BUILDER HOSTNAME = ${KBUILD_BUILD_HOST}
 echo DEVICE_DEFCONFIG = ${DEVICE_DEFCONFIG}
 echo TOOLCHAIN_VERSION = ${KBUILD_COMPILER_STRING}
-echo CLANG_ROOTDIR = ${CLANG_ROOTDIR}
+echo GCC_ROOTDIR = ${GCC_ROOTDIR}
 echo KERNEL_ROOTDIR = ${KERNEL_ROOTDIR}
 echo ================================================
 }
@@ -48,18 +51,14 @@ tg_post_msg() {
 compile(){
 cd ${KERNEL_ROOTDIR}
 export KERNEL_USE_CCACHE=1
-tg_post_msg "<b>Buiild Kernel Clang started..</b>"
+tg_post_msg "<b>Build Kernel GCC Started..</b>"
 make -j$(nproc --all) O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
-    CC=${CLANG_ROOTDIR}/bin/clang \
-    LLVM_AR=${CLANG_ROOTDIR}/bin/llvm-ar \
-    LLVM_DIS=${CLANG_ROOTDIR}/bin/llvm-dis \
-    NM=${CLANG_ROOTDIR}/bin/llvm-nm \
-    OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
-    OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
-    STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
-    CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
-    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
+    CROSS_COMPILE=${GCC_ROOTDIR}/bin/aarch64-elf- \
+    CROSS_COMPILE_ARM32=${GCC_ROOTDIR32}/bin/arm-eabi- \
+    AR=${GCC_ROOTDIR}/bin/aarch64-elf-ar \
+    OBJDUMP=${GCC_ROOTDIR}/bin/aarch64-elf-objdump \
+    STRIP=${GCC_ROOTDIR}/bin/aarch64-elf-strip
    if ! [ -a "$IMAGE" ]; then
 	finerr
 	kill %1
@@ -111,7 +110,6 @@ COMMIT_BY="$(git log --pretty=format:'by %an' -1)"
 BRANCH="$(git rev-parse --abbrev-ref HEAD)"
 
 }
-
 env
 check
 compile

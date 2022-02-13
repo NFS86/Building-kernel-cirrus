@@ -5,8 +5,8 @@ function env() {
 export KERNEL_NAME=NeedForSpeed-GCC
 KERNEL_ROOTDIR=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
-GCC_ROOTDIR=$CIRRUS_WORKING_DIR/GCC64
-GCC_ROOTDIR32=$CIRRUS_WORKING_DIR/GCC32
+GCC_ROOTDIR=$CIRRUS_WORKING_DIR/GCC-11-64
+GCC_ROOTDIR32=$CIRRUS_WORKING_DIR/GCC-11-32
 GCC_VER="$("$GCC_ROOTDIR"/bin/aarch64-elf-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 GCC_VER32="$("$GCC_ROOTDIR32"/bin/arm-eabi-gcc --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$GCC_ROOTDIR"/bin/ld.lld --version | head -n 1)"
@@ -61,7 +61,7 @@ make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
     STRIP=${GCC_ROOTDIR}/bin/aarch64-elf-strip
    if ! [ -a "$IMAGE" ]; then
 	finerr
-	exit 1
+	kill %1
    fi
 	git clone --depth=1 $ANYKERNEL $CIRRUS_WORKING_DIR/AnyKernel
 	cp $IMAGE $CIRRUS_WORKING_DIR/AnyKernel
