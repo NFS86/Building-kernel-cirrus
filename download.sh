@@ -8,4 +8,4 @@ git clone --depth 1 https://github.com/NFS-projects/gcc-arm -b 12.x $CIRRUS_WORK
 git clone --depth 1 https://github.com/NFS-projects/gcc-arm64 -b 12.x $CIRRUS_WORKING_DIR/GCC64
 git clone --depth 1 https://github.com/NFS-projects/gcc-arm -b 11.x $CIRRUS_WORKING_DIR/GCC-11-32
 git clone --depth 1 https://github.com/NFS-projects/gcc-arm64 -b 11.x $CIRRUS_WORKING_DIR/GCC-11-64
-git clone --depth 1 https://github.com/NFS-projects/NFS-clang -b main $CIRRUS_WORKING_DIR/CLANG
+git clone --depth 1 https://github.com/kdrag0n/proton-clang -b master $CIRRUS_WORKING_DIR/CLANG
