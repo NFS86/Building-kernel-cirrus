@@ -31,10 +31,11 @@ task:
       - ./rm.sh
 
   Build_kernel_GCC_11_script:
-      - ./gcc.sh
       - ./rm.sh
+      - ./gcc.sh
 
   Build_kernel_GCC_12_script:
+      - ./rm.sh
       - ./gcc12.sh
       - ./rm.sh
 

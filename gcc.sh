@@ -61,7 +61,6 @@ make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
     STRIP=${GCC_ROOTDIR}/bin/aarch64-elf-strip
    if ! [ -a "$IMAGE" ]; then
 	finerr
-	kill %1
    fi
 	git clone --depth=1 $ANYKERNEL $CIRRUS_WORKING_DIR/AnyKernel
 	cp $IMAGE $CIRRUS_WORKING_DIR/AnyKernel
@@ -96,7 +95,7 @@ function finerr() {
     curl -s -X POST "$BOT_MSG_URL2/sendSticker" \
         -d sticker="CAACAgIAAx0CXjGT1gACDRRhYsUKSwZJQFzmR6eKz2aP30iKqQACPgADr8ZRGiaKo_SrpcJQIQQ" \
         -d chat_id="$TG_CHAT_ID"
-    exit 1
+    kill %1
 }
 
 function info() {
