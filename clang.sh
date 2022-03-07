@@ -90,11 +90,11 @@ function finerr() {
     curl -s -X POST "$BOT_MSG_URL" -d chat_id="$TG_CHAT_ID" \
 	    -d "disable_web_page_preview=true" \
 	    -d "parse_mode=html" \
-        -d text="==============================%0A<b>          Building Kernel Failed [❌]</b>%0A==============================" \
+        -d text="==============================%0A<b>    Building Kernel CLANG Failed [❌]</b>%0A==============================" \
     curl -s -X POST "$BOT_MSG_URL2/sendSticker" \
         -d sticker="CAACAgIAAx0CXjGT1gACDRRhYsUKSwZJQFzmR6eKz2aP30iKqQACPgADr8ZRGiaKo_SrpcJQIQQ" \
         -d chat_id="$TG_CHAT_ID"
-    kill %1
+    exit 1
 }
 
 function info() {
