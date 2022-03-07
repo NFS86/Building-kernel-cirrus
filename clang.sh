@@ -55,6 +55,9 @@ make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
     LLVM_AR=${CLANG_ROOTDIR}/bin/llvm-ar \
     LLVM_DIS=${CLANG_ROOTDIR}/bin/llvm-dis \
     NM=${CLANG_ROOTDIR}/bin/llvm-nm \
+    LD=${CLANG_ROOTDIR}/bin/ld.lld \
+    OBJSIZE=${CLANG_ROOTDIR}/bin/llvm-size \
+    READELF=${CLANG_ROOTDIR}/bin/llvm-readelf \
     OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
     OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
