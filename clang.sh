@@ -57,11 +57,6 @@ make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
     OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
     OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
-    HOSTCC=${CLANG_ROOTDIR}/bin/clang \
-    HOSTCXX=${CLANG_ROOTDIR}/bin/clang++ \
-    HOSTAR=${CLANG_ROOTDIR}/bin/llvm-ar \
-    HOSTAS=${CLANG_ROOTDIR}/bin/llvm-as \
-    HOSTNM=${CLANG_ROOTDIR}/bin/llvm-nm \
     CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
     CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
    if ! [ -a "$IMAGE" ]; then
