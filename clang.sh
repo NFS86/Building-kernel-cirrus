@@ -53,9 +53,20 @@ make -j$(nproc --all) O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
     CC=${CLANG_ROOTDIR}/bin/clang \
     NM=${CLANG_ROOTDIR}/bin/llvm-nm \
+    AR=${CLANG_ROOTDIR}/bin/llvm-ar \
+    AS=${CLANG_ROOTDIR}/bin/llvm-as \
+    LD=${CLANG_ROOTDIR}/bin/ld.lld \
     OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
     OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
+    OBJSIZE=${CLANG_ROOTDIR}/bin/llvm-size \
+    READELF=${CLANG_ROOTDIR}/bin/llvm-readelf \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
+    HOSTCC=${CLANG_ROOTDIR}/bin/clang \
+    HOSTCXX=${CLANG_ROOTDIR}/bin/clang++ \
+    HOSTAR=${CLANG_ROOTDIR}/bin/llvm-ar \
+    HOSTAS=${CLANG_ROOTDIR}/bin/llvm-as \
+    HOSTNM=${CLANG_ROOTDIR}/bin/llvm-nm \
+    HOSTLD=${CLANG_ROOTDIR}/bin/ld.lld \
     CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
     CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
    if ! [ -a "$IMAGE" ]; then
