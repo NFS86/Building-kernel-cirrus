@@ -16,13 +16,6 @@ task:
       cpu: 8
       memory: 32G
 
-  Environment_script:
-      - cat /etc/os*
-      - env
-
-  Spec-Check_script:
-      - ./disk.sh
-  
   Sync_script:
       - ./download.sh
 
