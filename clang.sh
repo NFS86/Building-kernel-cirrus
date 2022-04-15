@@ -50,6 +50,9 @@ cd ${KERNEL_ROOTDIR}
 tg_post_msg "<b>Buiild Kernel Clang started..</b>"
 make -j$(nproc --all) O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
+    HOSTCC=${CLANG_ROOTDIR}/bin/clang \
+    HOSTCXX=${CLANG_ROOTDIR}/bin/clang++ \
+    CFLAGS_MODULE="-fno-pic" \
     CC=${CLANG_ROOTDIR}/bin/clang \
     NM=${CLANG_ROOTDIR}/bin/llvm-nm \
     AR=${CLANG_ROOTDIR}/bin/llvm-ar \
