@@ -2,9 +2,9 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=NeedForSpeed-CLANG
+export KERNEL_NAME=M•R•T🇲🇨
 KERNEL_ROOTDIR=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME
-DEVICE_DEFCONFIG=rosy-perf_defconfig
+DEVICE_DEFCONFIG=mido_defconfig
 CLANG_ROOTDIR=$CIRRUS_WORKING_DIR/CLANG
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
@@ -20,16 +20,6 @@ export BOT_MSG_URL2="https://api.telegram.org/bot$TG_TOKEN"
 # Checking environtment
 # Warning !! Dont Change anything there without known reason.
 function check() {
-echo ================================================
-echo "              _  __  ____  ____               "
-echo "             / |/ / / __/ / __/               "
-echo "      __    /    / / _/  _\ \    __           "
-echo "     /_/   /_/|_/ /_/   /___/   /_/           "
-echo "    ___  ___  ____     _________________      "
-echo "   / _ \/ _ \/ __ \__ / / __/ ___/_  __/      "
-echo "  / ___/ , _/ /_/ / // / _// /__  / /         "
-echo " /_/  /_/|_|\____/\___/___/\___/ /_/          "
-echo ================================================
 echo BUILDER NAME = ${KBUILD_BUILD_USER}
 echo BUILDER HOSTNAME = ${KBUILD_BUILD_HOST}
 echo DEVICE_DEFCONFIG = ${DEVICE_DEFCONFIG}
