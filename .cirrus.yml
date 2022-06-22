@@ -23,13 +23,5 @@ task:
       - ./clang.sh
       - ./rm.sh
 
-  Build_kernel_GCC_11_script:
-      - ./gcc.sh
-      - ./rm.sh
-
-  Build_kernel_GCC_12_script:
-      - ./gcc12.sh
-      - ./rm.sh
-
   Notif_script:
       - ./done.sh
