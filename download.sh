@@ -2,7 +2,7 @@
 
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
-git clone --depth 1 https://github.com/RasyidAlKautsar/ethereal_mido -b main $CIRRUS_WORKING_DIR/$DEVICE_CODENAME
+git clone --depth 1 https://github.com/HANA-CI-Build-Project/kernel_xiaomi_msm8953-4.9 -b lineage-17.1 $CIRRUS_WORKING_DIR/$DEVICE_CODENAME
 # Toolchain
 git clone --depth 1 https://github.com/NFS-projects/gcc-arm -b 12.x $CIRRUS_WORKING_DIR/GCC32
 git clone --depth 1 https://github.com/NFS-projects/gcc-arm64 -b 12.x $CIRRUS_WORKING_DIR/GCC64
