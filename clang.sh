@@ -2,7 +2,7 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=NeedForSpeed-CLANG
+export KERNEL_NAME=MRT-Kernel-CLANG
 KERNEL_ROOTDIR=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
 CLANG_ROOTDIR=$CIRRUS_WORKING_DIR/CLANG
@@ -79,7 +79,7 @@ function push() {
         -F "parse_mode=html" \
         -F caption="$KERNEL_NAME
 ==========================
-👤 Owner: AnGgIt86
+👤 Owner: Kang [M•R•T]
 🏚️ Linux version: $KERNEL_VERSION
 🌿 Branch: $BRANCH
 🎁 Top commit: $LATEST_COMMIT
