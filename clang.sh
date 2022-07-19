@@ -44,7 +44,7 @@ tg_post_msg() {
   -d "parse_mode=html" \
   -d text="$1"
 }
-# Compile
+# Peocces Compile
 compile(){
 cd ${KERNEL_ROOTDIR}
 tg_post_msg "<b>Buiild Kernel Clang started..</b>"
@@ -68,7 +68,7 @@ make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
 	git clone --depth=1 $ANYKERNEL $CIRRUS_WORKING_DIR/AnyKernel
 	cp $IMAGE $CIRRUS_WORKING_DIR/AnyKernel
 }
-# Push kernel to channel
+# Push kernel to channel or Group
 function push() {
     cd $CIRRUS_WORKING_DIR/AnyKernel
     zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
@@ -89,7 +89,7 @@ function push() {
 ==========================
 Compile took $(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)."
 }
-# Fin Error
+# Find Error
 function finerr() {
     curl -s -X POST "$BOT_MSG_URL" -d chat_id="$TG_CHAT_ID" \
 	    -d "disable_web_page_preview=true" \
@@ -100,7 +100,7 @@ function finerr() {
         -d chat_id="$TG_CHAT_ID"
     exit 1
 }
-
+# Check Latest commit and info kernel build
 function info() {
 cd $KERNEL_ROOTDIR
 KERNEL_VERSION=$(cat $KERNEL_ROOTDIR/out/.config | grep Linux/arm64 | cut -d " " -f3)
