@@ -61,7 +61,8 @@ make -j$(nproc --all) ARCH=arm64 SUBARCH=arm64 O=out \
     OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
     CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
-    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
+    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi- \
+    CROSS_COMPILE_PREFIX=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu-
    if ! [ -a "$IMAGE" ]; then
 	finerr
    fi
@@ -83,6 +84,7 @@ function push() {
 🏚️ Linux version: $KERNEL_VERSION
 🌿 Branch: $BRANCH
 🎁 Top commit: $LATEST_COMMIT
+🧧 SHA: $TRIGGER_SHA
 👩‍💻 Commit author: $COMMIT_BY
 🐧 UTS version: $UTS_VERSION
 💡 Compiler: $TOOLCHAIN_VERSION
