@@ -21,7 +21,6 @@ task:
 
   Build_kernel_Clang_script:
       - ./clang.sh
-      - ./rm.sh
 
   Notif_script:
       - ./done.sh
