@@ -98,7 +98,7 @@ function finerr() {
 	    -d "parse_mode=html" \
         -d text="==============================%0A<b>    Building Kernel CLANG Failed [❌]</b>%0A==============================" \
     curl -s -X POST "$BOT_MSG_URL2/sendSticker" \
-        -d sticker="CAACAgIAAx0CXjGT1gACDRRhYsUKSwZJQFzmR6eKz2aP30iKqQACPgADr8ZRGiaKo_SrpcJQIQQ" \
+        -d sticker="CAACAgQAAx0EabRMmQACAnRjEUAXBTK1Ei_zbJNPFH7WCLzSdAACpBEAAqbxcR716gIrH45xdB4E" \
         -d chat_id="$TG_CHAT_ID"
     exit 1
 }
