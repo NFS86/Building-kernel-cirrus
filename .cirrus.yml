@@ -9,7 +9,7 @@ env:
     TG_CHAT_ID: "ENCRYPTED[f9a7f3ce904073ae5d595a4a673a783c67aef3d9fd2bb4bb0ebe6ea8272b51f42c7281586444c33dc052d51ae3500576]"
 
 task:
-  name: "Kernel deploy.."
+  name: "Kernel Build.."
   timeout_in: 2h
   container:
       image: anggit86/docker:cirrus
