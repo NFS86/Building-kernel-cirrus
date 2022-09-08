@@ -51,6 +51,7 @@ tg_post_msg "<b>Buiild Kernel Clang started..</b>"
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
 	CC=${CLANG_ROOTDIR}/bin/clang \
+        OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
 	CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
 	CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
    if ! [ -a "$IMAGE" ]; then
