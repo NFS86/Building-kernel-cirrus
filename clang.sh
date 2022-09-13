@@ -47,7 +47,7 @@ tg_post_msg() {
 # Peocces Compile
 compile(){
 cd ${KERNEL_ROOTDIR}
-tg_post_msg "<b>Buiild Kernel Clang started..</b>"
+tg_post_msg "<b>Buiild Kernel started..</b>"
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
 	CC=${CLANG_ROOTDIR}/bin/clang \
