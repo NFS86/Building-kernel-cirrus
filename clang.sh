@@ -75,7 +75,8 @@ function push() {
 🏚️ Linux version: $KERNEL_VERSION
 🌿 Branch: $BRANCH
 🎁 Top commit: $LATEST_COMMIT
-🧧 SHA: $TRIGGER_SHA
+🧧 SHA1: $(sha1sum "$ZIP" | cut -d' ' -f1)
+📚 MD5: $(md5sum "$ZIP" | cut -d' ' -f1)
 👩‍💻 Commit author: $COMMIT_BY
 🐧 UTS version: $UTS_VERSION
 💡 Compiler: $TOOLCHAIN_VERSION
