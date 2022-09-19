@@ -50,9 +50,13 @@ cd ${KERNEL_ROOTDIR}
 tg_post_msg "<b>Buiild Kernel started..</b>"
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
-	CC=${CLANG_ROOTDIR}/bin/clang \
-        AR=${CLANG_ROOTDIR}/bin/llvm-ar \
+	HOSTCC=${CLANG_ROOTDIR}/bin/clang \
+        HOSTCXX=${CLANG_ROOTDIR}/bin/clang++ \
+        CFLAGS_MODULE="-fno-pic" \
+        CC=${CLANG_ROOTDIR}/bin/clang \
         NM=${CLANG_ROOTDIR}/bin/llvm-nm \
+        AR=${CLANG_ROOTDIR}/bin/llvm-ar \
+        AS=${CLANG_ROOTDIR}/bin/llvm-as \
         OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
         OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
         STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
