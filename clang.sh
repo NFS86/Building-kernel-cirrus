@@ -2,6 +2,7 @@
 
 # Main Declaration
 function env() {
+export KERNEL_NAME=MRT-Kernel-CLANG
 KERNEL_ROOTDIR=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
 CLANG_ROOTDIR=$CIRRUS_WORKING_DIR/CLANG
@@ -74,7 +75,7 @@ make -j$(nproc) ARCH=arm64 O=out \
 # Push kernel to channel or Group
 function push() {
     cd $CIRRUS_WORKING_DIR/AnyKernel
-    zip -r $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
+    zip -r9 $KERNEL_NAME-$DEVICE_CODENAME-${DATE}.zip *
     ZIP=$(echo *.zip)
     curl -F document=@$ZIP "https://api.telegram.org/bot$TG_TOKEN/sendDocument" \
         -F chat_id="$TG_CHAT_ID" \
