@@ -50,7 +50,6 @@ cd ${KERNEL_ROOTDIR}
 tg_post_msg "<b>Buiild Kernel started..</b>"
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
-	LLVM=1 \
     CC=${CLANG_ROOTDIR}/bin/clang \
     AR=${CLANG_ROOTDIR}/bin/llvm-ar \
     AS=${CLANG_ROOTDIR}/bin/llvm-as \
