@@ -2,7 +2,6 @@
 
 # Main Declaration
 function env() {
-export KERNEL_NAME=MRT-Kernel-CLANG
 KERNEL_ROOTDIR=$CIRRUS_WORKING_DIR/$DEVICE_CODENAME
 DEVICE_DEFCONFIG=rosy-perf_defconfig
 CLANG_ROOTDIR=$CIRRUS_WORKING_DIR/CLANG
@@ -50,7 +49,22 @@ cd ${KERNEL_ROOTDIR}
 tg_post_msg "<b>Buiild Kernel started..</b>"
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
-	LLVM=1
+	LLVM=1 \
+    CC=${CLANG_ROOTDIR}/bin/clang \
+    AR=${CLANG_ROOTDIR}/bin/llvm-ar \
+    AS=${CLANG_ROOTDIR}/bin/llvm-as \
+    LD=${CLANG_ROOTDIR}/bin/ld.lld \
+    NM=${CLANG_ROOTDIR}/bin/llvm-nm \
+    OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
+    OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
+    OBJSIZE=${CLANG_ROOTDIR}/bin/llvm-size \
+    READELF=${CLANG_ROOTDIR}/bin/llvm-readelf \
+    STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
+    HOSTCC=${CLANG_ROOTDIR}/bin/clang \
+    HOSTCXX=${CLANG_ROOTDIR}/bin/clang++ \
+    HOSTLD=${CLANG_ROOTDIR}/bin/ld.lld \
+    CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
+    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
    if ! [ -a "$IMAGE" ]; then
 	finerr
    fi
@@ -66,9 +80,9 @@ function push() {
         -F chat_id="$TG_CHAT_ID" \
         -F "disable_web_page_preview=true" \
         -F "parse_mode=html" \
-        -F caption="$KERNEL_NAME
+        -F caption="
 ==========================
-👤 Owner: Kang [M•R•T]
+👤 Owner: $CIRRUS_REPO_OWNER
 🏚️ Linux version: $KERNEL_VERSION
 🌿 Branch: $BRANCH
 🎁 Top commit: $LATEST_COMMIT
