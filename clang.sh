@@ -64,7 +64,9 @@ make -j$(nproc) ARCH=arm64 O=out \
     HOSTCXX=${CLANG_ROOTDIR}/bin/clang++ \
     HOSTLD=${CLANG_ROOTDIR}/bin/ld.lld \
     CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
-    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
+    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi- \
+    LLVM=1 \
+    HOSTCFLAGS="-fuse-ld=lld -Wno-unused-command-line-argument"
    if ! [ -a "$IMAGE" ]; then
 	finerr
    fi
